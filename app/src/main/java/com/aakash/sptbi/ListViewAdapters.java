@@ -80,12 +80,15 @@ public class ListViewAdapters extends ArrayAdapter<Management_Decision> implemen
 				myRef.child(""+holder.type.toLowerCase().trim()).child(v.getTag().toString().trim()).child("status").setValue("Accepted");
 				Intent intent = new Intent(context,Management.class)
 						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				context.startActivity(intent);
+                ((Activity)context).finish();
+					context.startActivity(intent);
+
 				break;
 			case R.id.reject:
 				myRef.child(""+holder.type.toLowerCase().trim()).child(v.getTag().toString().trim()).removeValue();
 				Intent intent1 = new Intent(context,Management.class)
 						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                ((Activity)context).finish();
 				context.startActivity(intent1);
 				break;
 		}
