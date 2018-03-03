@@ -96,8 +96,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 Intent i=null;
                                       //          Toast.makeText(getApplicationContext(), ""+new_key_email+" Status:"+startup.getCompanyName(), Toast.LENGTH_SHORT).show();
                                                 if(status!=null) {
-                                                    if (status.equalsIgnoreCase("Accepted"))
+                                                    if (status.equalsIgnoreCase("Accepted")) {
+                                                        i.putExtra("type", "startup");
+                                                        i.putExtra("email", email);
                                                         i = new Intent(MainActivity.this, HomePage.class);
+                                                    }
+                                                        else
+                                                        i = new Intent(MainActivity.this, Pending.class);
+
+                                                }
+                                                else
+                                                    i = new Intent(MainActivity.this, Pending.class);
+
+                                                i.putExtra("type", "startup");
+                                                i.putExtra("email", email);
+                                                startActivity(i);
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
+
+
+                                } else if(type.equals("student")) {
+                                    Intent i = new Intent(MainActivity.this, Pending.class);
+                                    i.putExtra("type", "student");
+                                    i.putExtra("email", email);
+                                    startActivity(i);
+
+
+
+                            /*        myRef.child("student").child(new_key_email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot1) {
+
+                                            if(dataSnapshot1.exists()) {
+
+                                                Student student = dataSnapshot1.getValue(Student.class);;
+                                                String status = student.getStatus();
+                                                Intent i=null;
+                                                //          Toast.makeText(getApplicationContext(), ""+new_key_email+" Status:"+startup.getCompanyName(), Toast.LENGTH_SHORT).show();
+                                                if(status!=null) {
+                                                    if (status.equalsIgnoreCase("Accepted")) {
+                                                        i.putExtra("type", "startup");
+                                                        i.putExtra("email", email);
+                                                        i = new Intent(MainActivity.this, HomePage.class);
+                                                    }
                                                     else
                                                         i = new Intent(MainActivity.this, Pending.class);
 
@@ -117,12 +163,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     });
 
 
-                                } else if(type.equals("startup")) {
-                                    Intent i = new Intent(MainActivity.this, Pending.class);
-                                    i.putExtra("type", "student");
-                                    i.putExtra("email", email);
-                                    startActivity(i);
 
+
+
+*/
                                 }
                                 else
                                 {

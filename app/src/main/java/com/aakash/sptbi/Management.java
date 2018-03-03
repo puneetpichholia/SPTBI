@@ -14,7 +14,7 @@ public class Management extends AppCompatActivity {
     private Toolbar mToolbar;
 
     private ViewPager mViewPager;
-    private SignUpSectionsPagerAdapter mSectionsPagerAdapter;
+    private ManagementSectionPagerAdapter mSectionsPagerAdapter;
 
     private TabLayout mTabLayout;
     @Override
@@ -27,7 +27,7 @@ public class Management extends AppCompatActivity {
 
         //Tabs
         mViewPager = (ViewPager)findViewById(R.id.management_main_tabPager);
-        mSectionsPagerAdapter = new SignUpSectionsPagerAdapter(getSupportFragmentManager());
+        mSectionsPagerAdapter = new ManagementSectionPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mTabLayout = (TabLayout)findViewById(R.id.management_tabs);
