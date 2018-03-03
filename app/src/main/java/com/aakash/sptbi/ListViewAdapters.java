@@ -25,7 +25,7 @@ public class ListViewAdapters extends ArrayAdapter<Management_Decision> implemen
 	private Context context;
 	FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
 	DatabaseReference myRef = mDatabase.getReference("sptbiapp");
-
+	Management_Decision_Holder holder;
 	public ListViewAdapters(Context context, int layoutResourceId, List<Management_Decision> items) {
 		super(context, layoutResourceId, items);
 		this.layoutResourceId = layoutResourceId;
@@ -36,7 +36,7 @@ public class ListViewAdapters extends ArrayAdapter<Management_Decision> implemen
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View row = convertView;
-		Management_Decision_Holder holder = null;
+		 holder = null;
 
 		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
 		row = inflater.inflate(layoutResourceId, parent, false);
@@ -58,7 +58,7 @@ public class ListViewAdapters extends ArrayAdapter<Management_Decision> implemen
 
 	private void setupItem(Management_Decision_Holder holder) {
 		holder.tv1.setText(holder.management_decision.gettv1());
-
+		holder.type=holder.management_decision.getType();
 		holder.b1.setTag(holder.management_decision.getAccept_tag());
 		holder.b2.setTag(holder.management_decision.getReject_tag());
 
@@ -67,7 +67,7 @@ public class ListViewAdapters extends ArrayAdapter<Management_Decision> implemen
 	public static class Management_Decision_Holder {
 		Management_Decision management_decision;
 		TextView tv1;
-
+		String type;
 		Button b1;
 		Button b2;
 	}
@@ -77,13 +77,13 @@ public class ListViewAdapters extends ArrayAdapter<Management_Decision> implemen
 		switch(v.getId())
 		{
 			case R.id.accept:
-				myRef.child("startup").child(v.getTag().toString().trim()).child("status").setValue("Accepted");
+				myRef.child(""+holder.type.toLowerCase().trim()).child(v.getTag().toString().trim()).child("status").setValue("Accepted");
 				Intent intent = new Intent(context,Management.class)
 						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				context.startActivity(intent);
 				break;
 			case R.id.reject:
-				myRef.child("startup").child(v.getTag().toString().trim()).removeValue();
+				myRef.child(""+holder.type.toLowerCase().trim()).child(v.getTag().toString().trim()).removeValue();
 				Intent intent1 = new Intent(context,Management.class)
 						.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				context.startActivity(intent1);

@@ -150,6 +150,7 @@ list=(ListView)findViewById(R.id.listview);
 
 
 
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
@@ -159,7 +160,35 @@ list=(ListView)findViewById(R.id.listview);
         });
 
 
+        if(type.equalsIgnoreCase("student")) {
+            String key_email = email.replace(".", ",");
+            key_email = key_email.replace("@", "");
+            myRef.child("student").child(key_email.trim()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String Name=""+dataSnapshot.child("Name").getValue();
+                    String Email=""+dataSnapshot.child("Email").getValue();
+                    String Branch=""+dataSnapshot.child("Branch").getValue();
+                    String Contact=""+dataSnapshot.child("Contact").getValue();
+                    String request=""+dataSnapshot.child("request").getValue();
+                    String status=""+dataSnapshot.child("status").getValue();
+                    String reg_id=""+dataSnapshot.child("reg_id").getValue();
+                    profile.add(Name);
+                    profile.add(Email);
+                    profile.add(Branch);
+                    profile.add(Contact);
+                    profile.add(request);
+                    profile.add(status);
+                    profile.add(reg_id);
 
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
     @Override
@@ -248,18 +277,37 @@ list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     //DataSnapshot dataSnapshot=new DataSnapshot();
                     //dataSnapshot=(DataSnapshot) view.getTag();
                     //;
-                    k.putExtra("Company_Name",profile.get(0));
-                    k.putExtra("Ceo",profile.get(1));
-                    k.putExtra("Contact",profile.get(2));
-                    k.putExtra("Email",profile.get(3));
-                    k.putExtra("request_status",profile.get(4));
-                    k.putExtra("request",profile.get(5));
-                    k.putExtra("status",profile.get(6));
 
-                    k.putExtra("User_Profile","Yes");
+                        k.putExtra("Company_Name", profile.get(0));
+                        k.putExtra("Ceo", profile.get(1));
+                        k.putExtra("Contact", profile.get(2));
+                        k.putExtra("Email", profile.get(3));
+                        k.putExtra("request_status", profile.get(4));
+                        k.putExtra("request", profile.get(5));
+                        k.putExtra("status", profile.get(6));
+                        k.putExtra("type","startup");
+                        k.putExtra("User_Profile", "Yes");
 
-                    startActivity(k);
-                }
+                        startActivity(k);
+                    }
+                    else if(type.equalsIgnoreCase("student"))
+                    {
+
+                        Intent k=new Intent(HomePage.this,ProfilePage.class);
+
+                        k.putExtra("Name", profile.get(0));
+                        k.putExtra("Email", profile.get(1));
+                        k.putExtra("Branch", profile.get(2));
+                        k.putExtra("Contact", profile.get(3));
+                        k.putExtra("request", profile.get(4));
+                        k.putExtra("status", profile.get(5));
+                        k.putExtra("reg_id", profile.get(6));
+                        k.putExtra("type","student");
+                        k.putExtra("User_Profile", "Yes");
+
+                        startActivity(k);
+                    }
+
                // startActivity(i);
                 break;
 

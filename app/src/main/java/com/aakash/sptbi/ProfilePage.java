@@ -18,37 +18,72 @@ public class ProfilePage extends AppCompatActivity implements View.OnClickListen
 
 
     private Button btn_profile_page_logout;
-String Company_Name,Ceo_Name,Contact_No,Email_id,request_status,request,status,user_profile;
+String Company_Name,Ceo_Name,Contact_No,Email_id,request_status,request,status,user_profile,type,Name,reg_id,Branch;
 TextView Ceo,Contact,Email,startup_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
-        Ceo=(TextView)findViewById(R.id.tv_profile_ceo);
-        Contact=(TextView)findViewById(R.id.tv_profile_contact);
-        Email=(TextView)findViewById(R.id.tv_profile_email);
-        startup_name=(TextView)findViewById(R.id.startup_name);
-        btn_profile_page_logout = (Button)findViewById(R.id.btn_profile_page_logout);
+        Ceo = (TextView) findViewById(R.id.tv_profile_ceo);
+        Contact = (TextView) findViewById(R.id.tv_profile_contact);
+        Email = (TextView) findViewById(R.id.tv_profile_email);
+        startup_name = (TextView) findViewById(R.id.startup_name);
+        btn_profile_page_logout = (Button) findViewById(R.id.btn_profile_page_logout);
         btn_profile_page_logout.setOnClickListener(this);
 
-        Intent i=getIntent();
-        user_profile=i.getStringExtra("User_Profile");
-        if(user_profile.equalsIgnoreCase("Yes"))
-        {
-            btn_profile_page_logout.setVisibility(View.GONE);
-        }
-        Company_Name=i.getStringExtra("Company_Name");
-        Ceo_Name=i.getStringExtra("Ceo");
-        Contact_No=i.getStringExtra("Contact");
-        Email_id=i.getStringExtra("Email");
-        request_status=i.getStringExtra("request_status");
-        request=i.getStringExtra("request");
-        status=i.getStringExtra("status");
+        Intent i = getIntent();
+        user_profile = i.getStringExtra("User_Profile");
+        if (user_profile.equalsIgnoreCase("Yes")) {
+            btn_profile_page_logout.setVisibility(View.VISIBLE);
+            type = i.getStringExtra("type");
 
-        Ceo.setText(Ceo_Name);
-        Contact.setText(Contact_No);
-        Email.setText(Email_id);
-startup_name.setText(Company_Name);
+
+
+
+            if (type.equals("student")) {
+                Name = i.getStringExtra("Name");
+                Email_id = i.getStringExtra("Email");
+                Branch = i.getStringExtra("Branch");
+                Contact_No = i.getStringExtra("Contact");
+                request = i.getStringExtra("request");
+                status = i.getStringExtra("status");
+                reg_id = i.getStringExtra("reg_id");
+
+                startup_name.setText(Name + "\n" + reg_id);
+                Ceo.setText(Branch);
+                Contact.setText(Contact_No);
+                Email.setText(Email_id);
+            }
+            else
+            {
+                Company_Name = i.getStringExtra("Company_Name");
+                Ceo_Name = i.getStringExtra("Ceo");
+                Contact_No = i.getStringExtra("Contact");
+                Email_id = i.getStringExtra("Email");
+                request_status = i.getStringExtra("request_status");
+                request = i.getStringExtra("request");
+                status = i.getStringExtra("status");
+
+                Ceo.setText(Ceo_Name);
+                Contact.setText(Contact_No);
+                Email.setText(Email_id);
+                startup_name.setText(Company_Name);
+            }
+        }
+else {
+            Company_Name = i.getStringExtra("Company_Name");
+            Ceo_Name = i.getStringExtra("Ceo");
+            Contact_No = i.getStringExtra("Contact");
+            Email_id = i.getStringExtra("Email");
+            request_status = i.getStringExtra("request_status");
+            request = i.getStringExtra("request");
+            status = i.getStringExtra("status");
+
+            Ceo.setText(Ceo_Name);
+            Contact.setText(Contact_No);
+            Email.setText(Email_id);
+            startup_name.setText(Company_Name);
+        }
     }
 
     @Override

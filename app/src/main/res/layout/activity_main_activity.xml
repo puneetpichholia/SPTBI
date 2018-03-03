@@ -33,12 +33,6 @@
             style="@style/textView_style"/>
 
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/editText_style"/>
-
         <EditText
             android:id="@+id/et_mainactivity_email"
             android:hint="Enter Email ID"

@@ -42,7 +42,7 @@ public class signup_students extends Fragment {
         et_signup_student_contact=(EditText)view.findViewById(R.id.student_contact);
         et_signup_student_email=(EditText)view.findViewById(R.id.student_email);
         et_signup_student_reg_id=(EditText)view.findViewById(R.id.student_registration);
-        et_signup_student_Password=(EditText)view.findViewById(R.id.et_signup_startup_password);
+        et_signup_student_Password=(EditText)view.findViewById(R.id.student_password);
         btn_student_signup.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
 
@@ -53,18 +53,20 @@ public class signup_students extends Fragment {
                 String reg_id = et_signup_student_reg_id.getText().toString();
                 String password = et_signup_student_Password.getText().toString();
 
-                register_user(email,password);
+                register_user(name,email,contact,branch,"","Not Yet Accepted","",password,reg_id);
             }
         });
         return view;
     }
 
-    private void register_user(String email, final String password) {
+    private void register_user(String name,String Email,String Contact,String Branch,String request,String status,String placement, final String password,String reg_id) {
 
 
 
-        writeNewUser(email,"student",password);
-
+            writeNewUser(Email,"student",password);
+        studentdetails(name,Email,Contact,Branch,"","Not Yet Accepted","",password,reg_id);
+        Intent i=new Intent(getActivity(),MainActivity.class);
+        startActivity(i);
 
 
 
@@ -115,6 +117,38 @@ public class signup_students extends Fragment {
         Toast.makeText(this.getActivity().getApplicationContext(),""+myRef,Toast.LENGTH_SHORT).show();
         Intent i=new Intent(getActivity(),MainActivity.class);
         startActivity(i);
+
+
+
+
+
+    }
+
+
+
+    private void studentdetails(String name,String Email,String Contact,String Branch,String request,String status,String placement, final String password,String reg_id) {
+        //    Users user = new Users(email, type, password);
+        String key_email=Email.replace(".",",");
+        key_email=key_email.replace("@","");
+        //  String key = myRef.child("users").child(email).push().getKey();
+        Student student = new Student(name,Email,Contact,Branch,request,status,placement,reg_id);
+
+
+
+
+        // Map<String, Users> users = new HashMap<>();
+        //users.put(""+email, user);
+
+        // myRef.child("users").child(""+key_email).setValue(user);
+
+        Map<String, Object> studentValues = student.toMap();
+        //Toast.makeText(getActivity().getApplicationContext(),""+Email,Toast.LENGTH_SHORT).show();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("student/"+key_email , studentValues);
+
+
+        myRef.updateChildren(childUpdates);
+
 
 
 

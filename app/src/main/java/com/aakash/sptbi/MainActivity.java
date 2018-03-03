@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button signin,signup;
     EditText et_email,et_password;
     private TextView tv_forgotpassword;
-    private Spinner spinner;
+
     private static final String[]paths = {"I Am Student", "I Am Startup"};
     private FirebaseAuth mAuth;
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
@@ -43,17 +43,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
      tv_forgotpassword=(TextView)findViewById(R.id.tv_forgotpassword);
 
-        spinner = (Spinner)findViewById(R.id.spinner);
+
         et_email = (EditText)findViewById(R.id.et_mainactivity_email);
         et_password = (EditText)findViewById(R.id.et_mainactivity_password);
 
-        ArrayAdapter<String>adapter = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_spinner_item,paths);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-     spinner.setOnItemSelectedListener(this);
      signin.setOnClickListener(this);
      signup.setOnClickListener(this);
      tv_forgotpassword.setOnClickListener(this);
@@ -96,11 +90,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 Intent i=null;
                                       //          Toast.makeText(getApplicationContext(), ""+new_key_email+" Status:"+startup.getCompanyName(), Toast.LENGTH_SHORT).show();
                                                 if(status!=null) {
-                                                    if (status.equalsIgnoreCase("Accepted")) {
-                                                        i.putExtra("type", "startup");
-                                                        i.putExtra("email", email);
+                                                    if (status.equalsIgnoreCase("Accepted"))
                                                         i = new Intent(MainActivity.this, HomePage.class);
-                                                    }
+
+
                                                         else
                                                         i = new Intent(MainActivity.this, Pending.class);
 
@@ -121,14 +114,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                                 } else if(type.equals("student")) {
-                                    Intent i = new Intent(MainActivity.this, Pending.class);
-                                    i.putExtra("type", "student");
-                                    i.putExtra("email", email);
-                                    startActivity(i);
 
 
 
-                            /*        myRef.child("student").child(new_key_email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    myRef.child("student").child(new_key_email).addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(DataSnapshot dataSnapshot1) {
 
@@ -139,11 +128,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 Intent i=null;
                                                 //          Toast.makeText(getApplicationContext(), ""+new_key_email+" Status:"+startup.getCompanyName(), Toast.LENGTH_SHORT).show();
                                                 if(status!=null) {
-                                                    if (status.equalsIgnoreCase("Accepted")) {
-                                                        i.putExtra("type", "startup");
-                                                        i.putExtra("email", email);
+                                                    if (status.equalsIgnoreCase("Accepted"))
                                                         i = new Intent(MainActivity.this, HomePage.class);
-                                                    }
+
+
+
                                                     else
                                                         i = new Intent(MainActivity.this, Pending.class);
 
@@ -151,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                 else
                                                     i = new Intent(MainActivity.this, Pending.class);
 
-                                                i.putExtra("type", "startup");
+                                                i.putExtra("type", "student");
                                                 i.putExtra("email", email);
                                                 startActivity(i);
                                             }
@@ -166,9 +155,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-*/
+
                                 }
-                                else
+                                else if(type.equalsIgnoreCase("Manager"))
                                 {
                                     Intent i = new Intent(MainActivity.this, Management.class);
                                     i.putExtra("type", "student");
@@ -177,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 }
                             } else {
-                                Toast.makeText(getApplicationContext(), "Invalid Email or Password", Toast.LENGTH_SHORT);
+                                Toast.makeText(getApplicationContext(), "Invalid Email or Password", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

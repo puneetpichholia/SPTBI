@@ -68,7 +68,7 @@ public class signup_startup extends Fragment {
 
 
              writeNewUser(email,"startup",password);
-             startupdetails(Company,email,Contact,CEO,"","No Response","Not Yet Accepted");
+             startupdetails(Company,email,Contact,CEO,"","No Response","Not Yet Accepted","");
         Intent i=new Intent(getActivity(),MainActivity.class);
         startActivity(i);
 
@@ -126,12 +126,12 @@ Toast.makeText(getActivity().getApplicationContext(),""+email,Toast.LENGTH_SHORT
 
 
 
-    private void startupdetails(String Company_Name,String Email,String Contact,String CEO,String requests,String status,String request_status) {
+    private void startupdetails(String Company_Name,String Email,String Contact,String CEO,String requests,String status,String request_status,String Applied) {
         //    Users user = new Users(email, type, password);
         String key_email=Email.replace(".",",");
         key_email=key_email.replace("@","");
         //  String key = myRef.child("users").child(email).push().getKey();
-        Startup startup = new Startup(Company_Name, Email,Contact,CEO,requests,status,request_status);
+        Startup startup = new Startup(Company_Name, Email,Contact,CEO,requests,status,request_status,Applied);
 
 
 

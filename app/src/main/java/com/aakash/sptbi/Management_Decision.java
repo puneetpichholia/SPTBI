@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Management_Decision implements Serializable{
 	private static final long serialVersionUID = -5435670920302756945L;
-	private String tv1,Accept_Button_tag,Reject_Button_tag;
+	private String tv1,Accept_Button_tag,Reject_Button_tag,type;
 	
 
-	public Management_Decision(String tv1, String Accept_Button_tag, String Reject_Button_tag) {
+	public Management_Decision(String tv1, String Accept_Button_tag, String Reject_Button_tag,String type) {
 		this.tv1=tv1;
 
 		this.Accept_Button_tag=Accept_Button_tag;
 		this.Reject_Button_tag=Reject_Button_tag;
-
+		this.type=type;
 		
 	}
 	
@@ -30,7 +30,10 @@ public class Management_Decision implements Serializable{
 	{
 	    return Reject_Button_tag;
 	}
-	
+	public String getType()
+	{
+		return type;
+	}
 
 	
 	

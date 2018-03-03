@@ -7,46 +7,48 @@ import java.util.Map;
  * Created by aakas on 28-02-2018.
  */
 
-public class Startup {
+public class Student {
 
-    private String Company_Name;
+    private String Name;
     private String Contact;
-    private String Ceo;
+    private String Branch;
     private String Email;
     private String requests;
-    private String request_status;
+    private String placement;
     private String status;
     private String applied;
-    public Startup() {
+    private String reg_id;
+
+    public Student() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public Startup(String Company_Name,String Email,String Contact,String Ceo,String requests,String status,String request_status,String Applied) {
-        this.Company_Name = Company_Name;
+    public Student(String Name, String Email, String Contact, String Branch, String requests, String status, String placement,String reg_id) {
+        this.Name =Name;
         this.Email=Email;
         this.Contact=Contact;
-        this.Ceo=Ceo;
+        this.Branch=Branch;
         this.requests=requests;
         this.status=status;
-        this.request_status=request_status;
-        this.applied=Applied;
+        this.placement=placement;
+        this.reg_id=reg_id;
     }
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("Email", Email);
         result.put("Contact", Contact);
-        result.put("Company_Name", Company_Name);
-        result.put("Ceo",Ceo);
+        result.put("Name", Name);
+        result.put("Placement",placement);
         result.put("request",requests);
         result.put("status",status);
-        result.put("request_status",request_status);
-
+        result.put("Branch",Branch);
+        result.put("reg_id",reg_id);
         return result;
     }
 
-    public String getCompanyName()
+    public String getName()
     {
-        return Company_Name;
+        return Name;
     }
 
 
@@ -56,9 +58,9 @@ public class Startup {
     }
 
 
-    public String getCeo()
+    public String getPlacement()
     {
-        return Ceo;
+        return placement;
     }
 
 
@@ -70,15 +72,17 @@ public class Startup {
 
 
 
-    public String getRequest_status()
+    public String getBranch()
     {
-        return request_status;
+        return Branch;
     }
 
     public String getStatus()
     {
         return status;
     }
-
-
+    public String getRegId()
+    {
+        return reg_id;
+    }
 }

@@ -27,7 +27,7 @@ import java.util.List;
 public class Startup_Fragment extends Fragment {
     private static final String TAG = "Startup_Fragment";
 
-    Button btn_click_me_1;
+
     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
     DatabaseReference myRef = mDatabase.getReference("sptbiapp");
 ArrayList<String>startup_details=new ArrayList<>();
@@ -85,7 +85,7 @@ ArrayList<String>startup_details=new ArrayList<>();
                         String email=" "+ uniqueKeySnapshot.child("Email").getValue();
                         String key_email=email.replace(".",",");
                         key_email=key_email.replace("@","");
-                        item.add(new Management_Decision("" + uniqueKeySnapshot.child("Company_Name").getValue(),key_email.trim(),key_email.trim()));
+                        item.add(new Management_Decision("" + uniqueKeySnapshot.child("Company_Name").getValue(),key_email.trim(),key_email.trim(),"startup"));
                         //   adapter.add(new Management_Decision(startup,"Accept","Reject"));
                         startupList.setAdapter(adapter);
 
@@ -119,17 +119,7 @@ ArrayList<String>startup_details=new ArrayList<>();
 
 
 
-    public void Accept(View v)
-    {
 
-    }
-
-
-
-    public void Reject(View v)
-    {
-
-    }
 
 
 }
